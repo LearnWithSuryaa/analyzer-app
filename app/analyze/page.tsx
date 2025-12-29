@@ -7,7 +7,6 @@ import ResultSection from "@/components/ResultSection";
 import { analyzeSentence } from "@/lib/analyzer";
 import { AnalysisResult, ChatMessage } from "@/lib/types";
 import { motion, AnimatePresence } from "framer-motion";
-import { User } from "lucide-react";
 
 function AnalyzeContent() {
   const router = useRouter();
