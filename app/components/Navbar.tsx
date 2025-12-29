@@ -40,18 +40,22 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 text-xs text-white/70 transition-all">
-              <History size={14} />
-              <span>History</span>
-            </button>
+          <div className="flex items-center gap-3">
             <button
-              className="p-2 rounded-lg bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 transition-colors border border-indigo-500/20"
+              className="p-2 rounded-lg bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 transition-colors border border-indigo-500/20"
               title="New Analysis"
               onClick={() => window.location.reload()}
             >
               <Plus size={18} />
             </button>
+            <div className="h-6 w-px bg-white/10" />
+            <div className="w-8 h-8 rounded-full border border-white/10 overflow-hidden ring-2 ring-transparent hover:ring-indigo-500/50 transition-all cursor-pointer">
+              <img
+                src="/avatar.jpeg"
+                alt="User"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </nav>
