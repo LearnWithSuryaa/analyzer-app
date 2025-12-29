@@ -91,25 +91,7 @@ function AnalyzeContent() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative">
-      {/* Header */}
-      <header className="flex-none p-4 px-6 md:px-8 bg-transparent z-30 fixed top-0 w-full flex justify-between items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3 cursor-pointer w-max"
-          onClick={() => router.push("/")}
-        >
-          <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md">
-            <span className="text-lg">ꦗ</span>
-          </div>
-          <div>
-            <h1 className="text-lg font-bold text-white leading-tight">
-              Javanese AI
-            </h1>
-            <p className="text-[10px] text-white/40">Analyzer</p>
-          </div>
-        </motion.div>
-      </header>
+      {/* Header handled by Global Navbar component (Contextual) */}
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto scroll-smooth pt-20 pb-32">
