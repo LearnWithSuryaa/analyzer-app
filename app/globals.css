@@ -4,31 +4,53 @@
   --foreground: #ffffff;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background-color: #0f172a;
   background-image: radial-gradient(
       at 0% 0%,
-      hsla(253, 16%, 7%, 1) 0,
+      hsla(253, 16%, 5%, 1) 0,
       transparent 50%
     ),
-    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+    radial-gradient(at 50% 0%, hsla(225, 39%, 15%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 15%, 1) 0, transparent 50%);
   background-attachment: fixed;
   min-height: 100vh;
   font-family: var(--font-geist-sans), sans-serif;
+  animation: breathe 20s ease-in-out infinite;
 }
 
-@utility glass-panel {
-  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.05] shadow-2xl rounded-2xl;
+@keyframes breathe {
+  0% {
+    background-size: 100% 100%;
+    background-position: 0% 0%;
+  }
+  50% {
+    background-size: 105% 105%;
+    background-position: 50% 50%;
+  }
+  100% {
+    background-size: 100% 100%;
+    background-position: 0% 0%;
+  }
 }
 
-@utility glass-card {
-  @apply bg-white/[0.02] backdrop-blur-md border border-white/10 shadow-lg hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 rounded-xl;
-}
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/[0.02] backdrop-blur-2xl border border-white/[0.05] shadow-2xl rounded-3xl;
+  }
 
-@utility text-glow {
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  .glass-card {
+    @apply bg-white/[0.01] backdrop-blur-2xl border border-white/[0.03] shadow-xl hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500 rounded-3xl;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
 }
 
 /* Tree Visualization Styles */
@@ -56,7 +78,7 @@ body {
   position: absolute;
   top: 0;
   right: 50%;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(99, 102, 241, 0.3);
   width: 50%;
   height: 20px;
 }
@@ -64,7 +86,7 @@ body {
 .tree-view li::after {
   right: auto;
   left: 50%;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 /* We need to remove left-right connectors from elements without any siblings */
@@ -84,7 +106,7 @@ body {
 
 /* Adding back the vertical connector to the last nodes */
 .tree-view li:last-child::before {
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(99, 102, 241, 0.3);
   border-radius: 0 5px 0 0;
 }
 .tree-view li:first-child::after {
@@ -97,7 +119,7 @@ body {
   position: absolute;
   top: 0;
   left: 50%;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(99, 102, 241, 0.3);
   width: 0;
   height: 20px;
 }
