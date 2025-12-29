@@ -38,9 +38,11 @@ const TreeNode = ({ node }: { node: ParseNode }) => {
 export default function TreeVisualizer({ data }: TreeVisualizerProps) {
   return (
     <div className="w-full h-full flex flex-col glass-card bg-slate-900/40 p-0 overflow-hidden">
-      <div className="p-4 border-b border-white/10 bg-white/5 backdrop-blur-md sticky top-0 z-20">
+      <div className="p-4 border-b border-white/10 bg-white/5 backdrop-blur-md sticky top-0 z-20 flex items-center h-[4.5rem] md:h-auto min-h-[64px]">
         <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-          <span className="w-2 h-6 bg-indigo-500 rounded-full inline-block"></span>
+          <span className="w-6 h-6 flex items-center justify-center">
+            <span className="w-2 h-6 bg-indigo-500 rounded-full inline-block"></span>
+          </span>
           Parse Tree Structure
         </h3>
       </div>

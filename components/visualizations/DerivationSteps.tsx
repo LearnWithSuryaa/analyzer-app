@@ -23,7 +23,7 @@ export default function DerivationSteps({ steps }: { steps: string[] }) {
 
   return (
     <div className="glass-card p-0 h-full flex flex-col overflow-hidden bg-slate-900/40">
-      <div className="p-4 border-b border-white/10 bg-white/5 backdrop-blur-md sticky top-0 z-20 flex justify-between items-center">
+      <div className="p-4 border-b border-white/10 bg-white/5 backdrop-blur-md sticky top-0 z-20 flex justify-between items-center min-h-[64px]">
         <h3 className="text-lg font-semibold text-white flex items-center gap-2">
           <span className="flex items-center justify-center w-6 h-6 rounded bg-indigo-500/20 text-indigo-300 text-xs font-mono">
             LM
