@@ -7,12 +7,12 @@ import { Copy, Check, AlertCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function DocsPage() {
-  const [copied, setCopied] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const copyCode = (code: string) => {
+  const copyCode = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   return (
@@ -76,12 +76,13 @@ export default function DocsPage() {
                 <button
                   onClick={() =>
                     copyCode(
-                      "git clone https://github.com/LearnWithSuryaa/analyzer-app.git\ncd analyzer-app\nnpm install\nnpm run dev"
+                      "git clone https://github.com/LearnWithSuryaa/analyzer-app.git\ncd analyzer-app\nnpm install\nnpm run dev",
+                      "install"
                     )
                   }
                   className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
                 >
-                  {copied ? (
+                  {copiedId === "install" ? (
                     <Check size={16} className="text-emerald-400" />
                   ) : (
                     <Copy size={16} />
@@ -136,12 +137,13 @@ export default function DocsPage() {
                 <button
                   onClick={() =>
                     copyCode(
-                      "import { analyze } from '@javanese-ai/core';\n\nconst result = analyze('Kula nedha sekul');\nconsole.log(result);"
+                      "import { analyze } from '@javanese-ai/core';\n\nconst result = analyze('Kula nedha sekul');\nconsole.log(result);",
+                      "quickstart"
                     )
                   }
                   className="p-1.5 rounded hover:bg-white/10 text-white/40 hover:text-white transition-colors"
                 >
-                  {copied ? (
+                  {copiedId === "quickstart" ? (
                     <Check size={14} className="text-emerald-400" />
                   ) : (
                     <Copy size={14} />
