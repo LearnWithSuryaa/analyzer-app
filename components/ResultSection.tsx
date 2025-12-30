@@ -1,6 +1,6 @@
 "use client";
 
-import { AnalysisResult } from "@/lib/types";
+import { AnalysisResult } from "@javanese-ai/core";
 import DerivationSteps from "./visualizations/DerivationSteps";
 import TreeVisualizer from "./visualizations/TreeVisualizer";
 import { motion } from "framer-motion";

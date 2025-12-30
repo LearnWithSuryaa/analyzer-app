@@ -4,8 +4,11 @@ import { useState, useEffect, Suspense, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ChatInput from "@/components/ChatInput";
 import ResultSection from "@/components/ResultSection";
-import { analyzeSentence } from "@/lib/analyzer";
-import { AnalysisResult, ChatMessage } from "@/lib/types";
+import {
+  analyzeSentence,
+  AnalysisResult,
+  ChatMessage,
+} from "@javanese-ai/core";
 import { motion, AnimatePresence } from "framer-motion";
 
 function AnalyzeContent() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ParseNode } from "@/lib/types";
+import { ParseNode } from "@javanese-ai/core";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, Minimize2 } from "lucide-react";
 import { useState } from "react";

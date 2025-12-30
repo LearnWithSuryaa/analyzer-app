@@ -64,22 +64,54 @@ export default function DocsPage() {
           >
             <h2 className="text-3xl font-semibold text-white">Installation</h2>
             <p className="text-white/60 leading-relaxed">
-              Install the core library via npm or yarn. Requires Node.js 18+.
+              This project is structured as a Monorepo. To get started, clone
+              the repository and install dependencies to link the
+              <code className="text-indigo-300 mx-1">
+                @javanese-ai/core
+              </code>{" "}
+              workspace.
             </p>
-            <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 flex items-center justify-between group">
-              <code className="font-mono text-blue-300">
-                npm install @javanese-ai/core
-              </code>
-              <button
-                onClick={() => copyCode("npm install @javanese-ai/core")}
-                className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
-              >
-                {copied ? (
-                  <Check size={16} className="text-emerald-400" />
-                ) : (
-                  <Copy size={16} />
-                )}
-              </button>
+            <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 group relative">
+              <div className="absolute right-4 top-4">
+                <button
+                  onClick={() =>
+                    copyCode(
+                      "git clone https://github.com/LearnWithSuryaa/analyzer-app.git\ncd analyzer-app\nnpm install\nnpm run dev"
+                    )
+                  }
+                  className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
+                >
+                  {copied ? (
+                    <Check size={16} className="text-emerald-400" />
+                  ) : (
+                    <Copy size={16} />
+                  )}
+                </button>
+              </div>
+              <div className="space-y-2 font-mono text-sm">
+                <div className="flex gap-2">
+                  <span className="text-white/30">$</span>
+                  <span className="text-blue-300">git clone</span>
+                  <span className="text-white/80">
+                    https://github.com/LearnWithSuryaa/analyzer-app.git
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-white/30">$</span>
+                  <span className="text-blue-300">cd</span>
+                  <span className="text-white/80">analyzer-app</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-white/30">$</span>
+                  <span className="text-blue-300">npm</span>
+                  <span className="text-yellow-300">install</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-white/30">$</span>
+                  <span className="text-blue-300">npm</span>
+                  <span className="text-emerald-300">run dev</span>
+                </div>
+              </div>
             </div>
           </section>
 
