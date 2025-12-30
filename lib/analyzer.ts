@@ -7,7 +7,7 @@ import {
   SemanticError,
 } from "./types";
 
-// === LOAD VOCABULARY ===
+// === MEMUAT KOSAKATA ===
 
 const SEMANTIC_MAP: Record<string, string> = {};
 const MEANING_MAP: Record<string, string> = {};
@@ -40,20 +40,20 @@ groups.forEach(([key, tag]) => {
   });
 
   if (words.length > 0) {
-    // Escape special characters just in case
+    // Escape karakter khusus sebagai antisipasi regex
     const escapedWords = words.map((w) =>
       w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
     );
-    // Sort by length desc
+    // Urutkan berdasarkan panjang (terpanjang dulu) agar match lebih akurat
     escapedWords.sort((a, b) => b.length - a.length);
 
-    // Create regex for exact match
+    // Buat regex untuk pencocokan eksak
     const pattern = `^(${escapedWords.join("|")})$`;
     PATTERNS.push({ regex: new RegExp(pattern, "i"), tag });
   }
 });
 
-// === HELPER FUNCTIONS ===
+// === FUNGSI PEMBANTU ===
 
 function getTokenKeterangan(tokenType: TokenType, tokenValue: string): string {
   const level = SEMANTIC_MAP[tokenValue];
@@ -72,14 +72,14 @@ function getTokenKeterangan(tokenType: TokenType, tokenValue: string): string {
     return "konjungsi";
   }
 
-  // Create a default if exists in MEANING_MAP
+  // Gunakan default jika ada di MEANING_MAP
   if (MEANING_MAP[tokenValue]) {
     return MEANING_MAP[tokenValue];
   }
   return "";
 }
 
-// levenshtein distance
+// Menghitung jarak Levenshtein (untuk koreksi typo)
 function levenshteinDistance(a: string, b: string): number {
   const matrix = [];
 
@@ -130,11 +130,11 @@ export function tokenize(text: string): Token[] {
       }
     }
     if (!matched) {
-      // Find closest match
+      // Cari kata yang paling mirip (fuzzy match)
       let closestWord = "";
       let minDistance = Infinity;
 
-      // Only fuzzy match if word length is reasonable to avoid noise
+      // Hanya lakukan fuzzy match jika panjang kata wajar untuk menghindari noise
       if (word.length > 2) {
         for (const dictWord of ALL_WORDS) {
           const dist = levenshteinDistance(word, dictWord);
@@ -145,8 +145,8 @@ export function tokenize(text: string): Token[] {
         }
       }
 
-      // Threshold: distance must be small relative to word length
-      // e.g. distance <= 2 for words > 3 chars
+      // Batas toleransi: jarak harus kecil relatif terhadap panjang kata
+      // cth: jarak <= 1 untuk kata pendek, <= 2 untuk kata panjang
       const threshold = word.length <= 4 ? 1 : 2;
 
       if (minDistance <= threshold) {
@@ -159,7 +159,7 @@ export function tokenize(text: string): Token[] {
   return tokens;
 }
 
-// === PARSER ===
+// === PARSER (PENGURAI SINTAKSIS) ===
 
 class Parser {
   tokens: Token[];
@@ -197,7 +197,7 @@ class Parser {
     return target < this.tokens.length ? this.tokens[target] : null;
   }
 
-  // S -> Clause (KONJUNGTIF Clause)*
+  // S -> Klausa (KONJUNGTIF Klausa)*
   parse_S(): ParseNode {
     this.logTrace("S", "Clause");
     const nodeS: ParseNode = { type: "S", children: [] };
@@ -216,7 +216,7 @@ class Parser {
     return nodeS;
   }
 
-  // Clause -> NP VP
+  // Clause -> NP VP (Klausa -> Frasa Nomina + Frasa Verba)
   parse_Clause(): ParseNode {
     this.logTrace("Clause", "NP VP");
     const nodeClause: ParseNode = { type: "CLAUSE", children: [] };
@@ -278,12 +278,6 @@ class Parser {
             const tNext = this.currentToken;
             this.eat(tNext.type);
             nodeNP.value += ` ${tk.value} ${tNext.value}`;
-            // We don't add children for compound parts in the original python code logic fully,
-            // but let's stick to the structure:
-            // "children" usage in python was partial.
-            // I will simply skip adding detailed compound children to keep consistent with Python logic
-            // explicitly used for derivation in Python which seemed to rely on `value`.
-            // But wait, the generate_leftmost_derivation uses children if present.
           } else {
             throw new Error(
               `Kesalahan Sintaksis: Diharapkan Kata Benda setelah '${tk.value}'`
@@ -382,7 +376,7 @@ class Parser {
   }
 }
 
-// === DERIVATION GENERATOR ===
+// === GENERATOR DERIVASI (RIWAYAT PENURUNAN) ===
 
 function generateLeftmostDerivation(treeRoot: ParseNode): string[] {
   const steps: string[] = [];
@@ -392,7 +386,7 @@ function generateLeftmostDerivation(treeRoot: ParseNode): string[] {
     if (["S", "CLAUSE", "NP", "VP", "PP"].includes(node.type)) {
       return node.type;
     }
-    return node.type; // Pre-Terminal
+    return node.type; // Pre-Terminal (Kata Asli)
   }
 
   function getFullString(list: (ParseNode | string)[]): string {
@@ -435,12 +429,12 @@ function generateLeftmostDerivation(treeRoot: ParseNode): string[] {
         ["S", "CLAUSE", "NP", "VP", "PP"].includes(candidateNode.type) ||
         (candidateNode.children && candidateNode.children.length > 0)
       ) {
-        // Expand children
+        // Ekspansi anak node
         const newNodes = candidateNode.children || [];
-        // Splice
+        // Sisipkan kembali ke string saat ini
         currentString.splice(candidateIdx, 1, ...newNodes);
       } else {
-        // Pre-Terminal with no children, expand to value
+        // Pre-Terminal tanpa anak, ekspansi ke nilai katanya (kata dasar)
         const word = candidateNode.value || "";
         currentString[candidateIdx] = word;
       }
@@ -453,7 +447,7 @@ function generateLeftmostDerivation(treeRoot: ParseNode): string[] {
   return steps;
 }
 
-// === SEMANTIC VALIDATOR ===
+// === VALIDATOR SEMANTIK (UNGGAH-UNGGUH) ===
 
 function validateClause(clauseNode: ParseNode): {
   isValid: boolean;
@@ -486,7 +480,7 @@ function validateClause(clauseNode: ParseNode): {
 
   const verbWord = (nodeV.value || "").toLowerCase();
 
-  // Check categories
+  // Cek kategori unggah-ungguh
   const subjCat = SEMANTIC_MAP[subjectWord];
   const verbCat = SEMANTIC_MAP[verbWord];
 
@@ -570,7 +564,7 @@ function validateSemantics(tree: ParseNode): {
   return { isValid: allValid, reasons: messages, corrections, allErrors };
 }
 
-// === MAIN ANALYZER ===
+// === ANALISIS UTAMA (MAIN) ===
 
 export function analyzeSentence(text: string): AnalysisResult {
   const tokens = tokenize(text);

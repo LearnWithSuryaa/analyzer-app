@@ -1,3 +1,4 @@
+// Tipe Token yang dikenali oleh Parser
 export type TokenType =
   | "SUBJEK"
   | "PREDIKAT"
@@ -22,6 +23,7 @@ export interface ParseNode {
   children?: ParseNode[];
 }
 
+// Struktur error untuk validasi unggah-ungguh
 export interface SemanticError {
   token: string;
   masalah: string;
@@ -30,6 +32,7 @@ export interface SemanticError {
   suggestion?: string;
 }
 
+// Hasil analisis lengkap (Sintaksis & Semantik)
 export interface AnalysisResult {
   tokens: { token: string; label: string; keterangan?: string }[];
   analisis: {
