@@ -1,106 +1,80 @@
-# ꦗ Javanese AI Analyzer
+# Javanese Krama Syntax Analyzer
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Next.js](https://img.shields.io/badge/Next.js-16.1-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8)
+Aplikasi web untuk menganalisis sintaksis dan validasi Unggah-Ungguh (tingkat kesopanan) dalam bahasa Jawa Krama.
 
-**Javanese AI Analyzer** is a modern, high-fidelity web application designed to analyze Javanese sentence structures and validate **Urutan Unggah-Ungguh** (politeness levels). Built with cutting-edge web technologies, it provides a premium, "Apple-like" user experience for linguistic analysis.
+## 🚀 Instalasi Lokal
 
-## ✨ Features
+```bash
+# Clone repository
+git clone https://github.com/LearnWithSuryaa/analyzer-app.git
+cd analyzer-app
 
-- **Syntax Analysis**: Automatically parses Javanese sentences into Subject (Jejer), Predicate (Wasesa), Object (Lesan), and Description (Katerangan) components using Context-Free Grammar (CFG).
-- **Unggah-Ungguh Validation**: Detects and highlights mismatches in politeness levels (e.g., mixing _Krama Inggil_ verbs with _Ngoko_ subjects).
-- **Interactive Visualizations**:
-  - **Parse Tree**: Visual hierarchical breakdown of sentence structure.
-  - **Derivation Trace**: Step-by-step derivation history of the parsing process.
-- **Premium UI/UX**:
-  - Glassmorphic design with smooth animations (Framer Motion).
-  - "Zen Mode" minimalist analyzer interface.
-  - Premium smooth scrolling (Lenis).
-  - Dynamic "Product Updates" timeline (Changelog).
+# Install dependencies (akan otomatis link workspace @javanese-ai/core)
+npm install
 
-## 🛠️ Technology Stack
-
-- **Framework**: [Next.js 16 (Turbopack)](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Scroll**: [Lenis](https://lenis.studio/)
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
-
-1.  **Clone the repository**
-
-    ```bash
-    git clone https://github.com/LearnWithSuryaa/analyzer-app.git
-    cd analyzer-app/web
-    ```
-
-2.  **Install dependencies**
-
-    ```bash
-    npm install
-    ```
-
-3.  **Run the development server**
-
-    ```bash
-    npm run dev
-    ```
-
-4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 📖 Usage
-
-1.  Navigate to the **Analyzer** page (`/analyze`).
-2.  Type a Javanese sentence (e.g., _"Kula dahar sekul wonten ing griya"_).
-3.  Press **Enter** or click the send button.
-4.  View the validation results, syntax breakdown, and visualization trees.
-
-## 📂 Project Structure
-
-```
-web/
-├── app/
-│   ├── analyze/       # Analyzer page & logic
-│   ├── about/         # About page with team & tech stack
-│   ├── changelog/     # Product updates timeline
-│   ├── docs/          # Documentation & styling guide
-│   └── components/    # Reusable UI components (Navbar, Footer, etc.)
-├── components/
-│   └── visualizations/# Tree & Derivation graph components
-├── data/
-│   └── kamus_jawa.json # Dictionary database for analysis
-├── lib/
-│   └── analyzer.ts    # Core CFG & Validation logic
-└── public/            # Static assets (images, logos)
+# Jalankan development server
+npm run dev
 ```
 
-## 🤝 Contributing
+Aplikasi akan berjalan di `http://localhost:3000`
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 📦 Struktur Monorepo
 
-1.  Fork the project
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`)
-4.  Push to the branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+```
+analyzer-app/
+├── packages/
+│   └── core/              # @javanese-ai/core - Logika parser & kamus
+│       ├── src/
+│       │   ├── analyzer.ts
+│       │   ├── types.ts
+│       │   └── data/
+│       │       └── kamus_jawa.json
+│       └── package.json
+└── web/                   # Aplikasi Next.js
+    ├── app/
+    ├── components/
+    └── package.json
+```
 
-## 📄 License
+## 🌐 Deployment ke Vercel
 
-This project is licensed under the **MIT License**.
+### Pengaturan Project di Vercel Dashboard:
 
----
+1. **Root Directory**: Biarkan kosong (gunakan root `/`)
+2. **Framework Preset**: Next.js
+3. **Build Command**: `cd web && npm run build`
+4. **Output Directory**: `web/.next`
+5. **Install Command**: `npm install`
 
-<p align="center">
-  Built with ❤️ by <a href="https://github.com/LearnWithSuryaa">Suryaa</a>
-</p>
+### Atau gunakan `vercel.json`:
+
+File `vercel.json` sudah dikonfigurasi untuk monorepo. Vercel akan otomatis membaca konfigurasi ini.
+
+## 🛠️ Tech Stack
+
+- **Core**: TypeScript, Custom CFG Parser
+- **Frontend**: Next.js 16, React 19, Tailwind CSS 4
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+
+## 📚 Fitur
+
+- ✅ Tokenisasi kata Jawa Krama/Ngoko
+- ✅ Parsing sintaksis (S-P-O-K)
+- ✅ Validasi Unggah-Ungguh (politeness level)
+- ✅ Visualisasi Parse Tree interaktif
+- ✅ Derivasi Left-most step-by-step
+- ✅ Fuzzy matching untuk koreksi typo
+- ✅ Support kalimat majemuk & subjek implisit
+
+## 📖 Dokumentasi
+
+Dokumentasi lengkap tersedia di `/docs` setelah aplikasi berjalan.
+
+## 🤝 Kontribusi
+
+Contributions are welcome! Silakan buat issue atau pull request.
+
+## 📄 Lisensi
+
+MIT License
