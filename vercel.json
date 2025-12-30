@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd .. && npm install && cd web && npm run build",
-  "installCommand": "cd .. && npm install",
-  "outputDirectory": ".next"
+  "buildCommand": "npm run build --workspace=web",
+  "installCommand": "npm install",
+  "outputDirectory": "web/.next"
 }
