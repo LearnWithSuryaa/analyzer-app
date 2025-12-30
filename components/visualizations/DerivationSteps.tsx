@@ -12,13 +12,32 @@ export default function DerivationSteps({ steps }: { steps: string[] }) {
     return cleanStr.split(" ");
   };
 
+  const NON_TERMINALS = new Set([
+    "S",
+    "CLAUSE",
+    "NP",
+    "VP",
+    "PP",
+    "SUBJEK",
+    "PREDIKAT",
+    "OBJEK_NOUN",
+    "WAKTU",
+    "KONJUNGTIF",
+    "AUX",
+    "ADJEKTIVA",
+    "BILANGAN",
+    "PRANATACARA",
+    "P", // Preposisi
+    "V", // Verba
+    "ADJ", // Adjektiva (Short)
+    "NUM", // Numeralia (Short)
+  ]);
+
   const isTerminal = (token: string) => {
-    // Basic heuristic: if it's all lowercase, it's likely a terminal (word)
-    // If it's mixed or all caps, it's a Non-Terminal (S, NP, VP, Subjek, etc.)
-    // However, our grammar uses SCREAMING_SNAKE_CASE for tokens (SUBJEK, PREDIKAT)
-    // And actual words are lowercase (kula, nedha).
-    // So: all lowercase = Terminal.
-    return token === token.toLowerCase() && token !== "⇒";
+    // If it's a known Non-Terminal symbol, it's not a terminal.
+    // Also check if it's the arrow symbol.
+    if (token === "⇒") return false;
+    return !NON_TERMINALS.has(token);
   };
 
   return (
@@ -52,7 +71,7 @@ export default function DerivationSteps({ steps }: { steps: string[] }) {
                 className="relative pl-12"
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-[#0f172a] z-10" />
+                <div className="absolute left-9 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-indigo-500 z-10 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
 
                 {/* Content */}
                 <div className="glass-panel p-3 flex flex-wrap gap-2 items-center min-h-[3rem]">
@@ -69,7 +88,7 @@ export default function DerivationSteps({ steps }: { steps: string[] }) {
                       <span
                         key={tIdx}
                         className={clsx(
-                          "px-2 py-1 rounded text-sm font-medium border transition-colors",
+                          "px-3 py-1.5 rounded-md text-base font-medium border transition-colors shadow-sm",
                           isT
                             ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-300"
                             : "bg-indigo-500/10 border-indigo-500/20 text-indigo-200"

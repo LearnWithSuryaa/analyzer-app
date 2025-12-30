@@ -3,15 +3,7 @@
 import { motion } from "framer-motion";
 import DocsSidebar from "../components/DocsSidebar";
 import OnThisPage from "../components/OnThisPage";
-import {
-  Copy,
-  Check,
-  Terminal,
-  Server,
-  AlertCircle,
-  Info,
-  Table,
-} from "lucide-react";
+import { Copy, Check, AlertCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function DocsPage() {

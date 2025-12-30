@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { motion, Variants, useScroll, useSpring } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   Sparkles,
   GitBranch,
