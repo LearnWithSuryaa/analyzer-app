@@ -4,10 +4,12 @@
 
 **Aplikasi web untuk menganalisis sintaksis dan validasi Unggah-Ungguh (tingkat kesopanan) dalam bahasa Jawa Krama.**
 
+[![npm version](https://img.shields.io/npm/v/javanese-analyzer-core.svg)](https://www.npmjs.com/package/javanese-analyzer-core)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/LearnWithSuryaa/analyzer-app)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [Demo Live](https://javanese-ai.vercel.app) • [Dokumentasi](#-fitur) • [Kontribusi](#-kontribusi)
 
@@ -17,21 +19,54 @@
 
 ## 🚀 Quick Start
 
-### Instalasi Lokal
+### Opsi 1: Install Package (Untuk Library Usage)
+
+Install core analyzer sebagai dependency di project Anda:
 
 ```bash
-# Clone repository
-git clone https://github.com/LearnWithSuryaa/analyzer-app.git
-cd analyzer-app
+npm install javanese-analyzer-core
+```
 
-# Install dependencies (otomatis link workspace @javanese-ai/core)
-npm install
+```typescript
+import { analyze } from "javanese-analyzer-core";
 
-# Jalankan development server
+const result = analyze("Kula nedha sekul");
+console.log(result);
+```
+
+### Opsi 2: CLI Tool (Recommended - Full App)
+
+Cara tercepat untuk membuat aplikasi lengkap:
+
+```bash
+npx create-javanese-analyzer my-app
+cd my-app
 npm run dev
 ```
 
 Aplikasi akan berjalan di **http://localhost:3000**
+
+### Opsi 3: Template Repository
+
+Gunakan template tanpa clone history:
+
+```bash
+npx degit LearnWithSuryaa/analyzer-app my-app
+cd my-app
+npm install
+npm run dev
+```
+
+### Opsi 4: Clone Repository (Untuk Development)
+
+Clone dengan full git history:
+
+```bash
+git clone https://github.com/LearnWithSuryaa/analyzer-app.git
+cd analyzer-app
+npm install
+npm run dev
+```
 
 ### Build Production
 
@@ -155,7 +190,7 @@ File `vercel.json` sudah dikonfigurasi:
 ### Import Package
 
 ```typescript
-import { analyze } from "@javanese-ai/core";
+import { analyze } from "javanese-analyzer-core";
 
 const result = analyze("Kula nedha sekul");
 console.log(result);

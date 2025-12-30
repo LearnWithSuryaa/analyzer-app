@@ -1,10 +1,39 @@
 {
-  "name": "@javanese-ai/core",
+  "name": "javanese-analyzer-core",
   "version": "1.0.0",
+  "description": "Javanese Krama syntax analyzer with Unggah-Ungguh (politeness level) validation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "javanese",
+    "krama",
+    "syntax-analyzer",
+    "nlp",
+    "parser",
+    "indonesian-language",
+    "unggah-ungguh",
+    "politeness-level",
+    "context-free-grammar"
+  ],
+  "author": "Surya (https://github.com/LearnWithSuryaa)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LearnWithSuryaa/analyzer-app.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://javanese-ai.vercel.app",
+  "bugs": {
+    "url": "https://github.com/LearnWithSuryaa/analyzer-app/issues"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

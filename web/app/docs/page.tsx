@@ -64,53 +64,203 @@ export default function DocsPage() {
           >
             <h2 className="text-3xl font-semibold text-white">Installation</h2>
             <p className="text-white/60 leading-relaxed">
-              This project is structured as a Monorepo. To get started, clone
-              the repository and install dependencies to link the
-              <code className="text-indigo-300 mx-1">
-                @javanese-ai/core
-              </code>{" "}
-              workspace.
+              Choose the installation method that best fits your needs. You can
+              install the core library, scaffold a complete application, or
+              clone the full repository.
             </p>
-            <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 group relative">
-              <div className="absolute right-4 top-4">
-                <button
-                  onClick={() =>
-                    copyCode(
-                      "git clone https://github.com/LearnWithSuryaa/analyzer-app.git\ncd analyzer-app\nnpm install\nnpm run dev",
-                      "install"
-                    )
-                  }
-                  className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
-                >
-                  {copiedId === "install" ? (
-                    <Check size={16} className="text-emerald-400" />
-                  ) : (
-                    <Copy size={16} />
-                  )}
-                </button>
+
+            {/* Option 1: NPM Package */}
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold text-indigo-300">
+                Option 1: Install Package (Library Usage)
+              </h3>
+              <p className="text-sm text-white/50">
+                Install the core analyzer as a dependency in your project.
+              </p>
+              <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 group relative">
+                <div className="absolute right-4 top-4">
+                  <button
+                    onClick={() =>
+                      copyCode(
+                        "npm install javanese-analyzer-core",
+                        "install-npm"
+                      )
+                    }
+                    className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
+                  >
+                    {copiedId === "install-npm" ? (
+                      <Check size={16} className="text-emerald-400" />
+                    ) : (
+                      <Copy size={16} />
+                    )}
+                  </button>
+                </div>
+                <div className="space-y-2 font-mono text-sm">
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npm</span>
+                    <span className="text-yellow-300">install</span>
+                    <span className="text-white/80">
+                      javanese-analyzer-core
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2 font-mono text-sm">
-                <div className="flex gap-2">
-                  <span className="text-white/30">$</span>
-                  <span className="text-blue-300">git clone</span>
-                  <span className="text-white/80">
-                    https://github.com/LearnWithSuryaa/analyzer-app.git
-                  </span>
+            </div>
+
+            {/* Option 2: CLI Tool */}
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold text-purple-300">
+                Option 2: CLI Tool (Recommended - Full App)
+              </h3>
+              <p className="text-sm text-white/50">
+                Scaffold a complete Next.js application with the analyzer
+                pre-configured.
+              </p>
+              <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 group relative">
+                <div className="absolute right-4 top-4">
+                  <button
+                    onClick={() =>
+                      copyCode(
+                        "npx create-javanese-analyzer my-app\ncd my-app\nnpm run dev",
+                        "install-cli"
+                      )
+                    }
+                    className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
+                  >
+                    {copiedId === "install-cli" ? (
+                      <Check size={16} className="text-emerald-400" />
+                    ) : (
+                      <Copy size={16} />
+                    )}
+                  </button>
                 </div>
-                <div className="flex gap-2">
-                  <span className="text-white/30">$</span>
-                  <span className="text-blue-300">cd</span>
-                  <span className="text-white/80">analyzer-app</span>
+                <div className="space-y-2 font-mono text-sm">
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npx</span>
+                    <span className="text-purple-300">
+                      create-javanese-analyzer
+                    </span>
+                    <span className="text-white/80">my-app</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">cd</span>
+                    <span className="text-white/80">my-app</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npm</span>
+                    <span className="text-emerald-300">run dev</span>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <span className="text-white/30">$</span>
-                  <span className="text-blue-300">npm</span>
-                  <span className="text-yellow-300">install</span>
+              </div>
+            </div>
+
+            {/* Option 3: Template */}
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold text-cyan-300">
+                Option 3: Template Repository
+              </h3>
+              <p className="text-sm text-white/50">
+                Use the template without git history.
+              </p>
+              <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 group relative">
+                <div className="absolute right-4 top-4">
+                  <button
+                    onClick={() =>
+                      copyCode(
+                        "npx degit LearnWithSuryaa/analyzer-app my-app\ncd my-app\nnpm install\nnpm run dev",
+                        "install-template"
+                      )
+                    }
+                    className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
+                  >
+                    {copiedId === "install-template" ? (
+                      <Check size={16} className="text-emerald-400" />
+                    ) : (
+                      <Copy size={16} />
+                    )}
+                  </button>
                 </div>
-                <div className="flex gap-2">
-                  <span className="text-white/30">$</span>
-                  <span className="text-blue-300">npm</span>
-                  <span className="text-emerald-300">run dev</span>
+                <div className="space-y-2 font-mono text-sm">
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npx</span>
+                    <span className="text-cyan-300">degit</span>
+                    <span className="text-white/80">
+                      LearnWithSuryaa/analyzer-app my-app
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">cd</span>
+                    <span className="text-white/80">my-app</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npm</span>
+                    <span className="text-yellow-300">install</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npm</span>
+                    <span className="text-emerald-300">run dev</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Option 4: Clone */}
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold text-emerald-300">
+                Option 4: Clone Repository (Development)
+              </h3>
+              <p className="text-sm text-white/50">
+                Clone with full git history for development and contributions.
+              </p>
+              <div className="bg-[#1e1e1e] border border-white/10 rounded-xl p-4 group relative">
+                <div className="absolute right-4 top-4">
+                  <button
+                    onClick={() =>
+                      copyCode(
+                        "git clone https://github.com/LearnWithSuryaa/analyzer-app.git\ncd analyzer-app\nnpm install\nnpm run dev",
+                        "install-clone"
+                      )
+                    }
+                    className="p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors"
+                  >
+                    {copiedId === "install-clone" ? (
+                      <Check size={16} className="text-emerald-400" />
+                    ) : (
+                      <Copy size={16} />
+                    )}
+                  </button>
+                </div>
+                <div className="space-y-2 font-mono text-sm">
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">git clone</span>
+                    <span className="text-white/80">
+                      https://github.com/LearnWithSuryaa/analyzer-app.git
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">cd</span>
+                    <span className="text-white/80">analyzer-app</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npm</span>
+                    <span className="text-yellow-300">install</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-white/30">$</span>
+                    <span className="text-blue-300">npm</span>
+                    <span className="text-emerald-300">run dev</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -137,7 +287,7 @@ export default function DocsPage() {
                 <button
                   onClick={() =>
                     copyCode(
-                      "import { analyze } from '@javanese-ai/core';\n\nconst result = analyze('Kula nedha sekul');\nconsole.log(result);",
+                      "import { analyze } from 'javanese-analyzer-core';\n\nconst result = analyze('Kula nedha sekul');\nconsole.log(result);",
                       "quickstart"
                     )
                   }
@@ -154,8 +304,10 @@ export default function DocsPage() {
                 <code>
                   <span className="text-purple-400">import</span> {"{"} analyze{" "}
                   {"}"} <span className="text-purple-400">from</span>{" "}
-                  <span className="text-emerald-300">'@javanese-ai/core'</span>;
-                  {"\n\n"}
+                  <span className="text-emerald-300">
+                    'javanese-analyzer-core'
+                  </span>
+                  ;{"\n\n"}
                   <span className="text-purple-400">const</span> result =
                   analyze(
                   <span className="text-emerald-300">'Kula nedha sekul'</span>);

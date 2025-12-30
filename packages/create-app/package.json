@@ -1,0 +1,35 @@
+{
+  "name": "create-javanese-analyzer",
+  "version": "1.0.0",
+  "description": "CLI tool to create a new Javanese Krama Analyzer application",
+  "bin": {
+    "create-javanese-analyzer": "./bin/index.js"
+  },
+  "keywords": [
+    "create-app",
+    "javanese",
+    "analyzer",
+    "cli",
+    "scaffold",
+    "template"
+  ],
+  "author": "Surya (https://github.com/LearnWithSuryaa)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LearnWithSuryaa/analyzer-app.git",
+    "directory": "packages/create-app"
+  },
+  "homepage": "https://javanese-ai.vercel.app",
+  "bugs": {
+    "url": "https://github.com/LearnWithSuryaa/analyzer-app/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "prompts": "^2.4.2",
+    "degit": "^2.8.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
