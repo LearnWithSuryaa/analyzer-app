@@ -204,16 +204,35 @@ class Parser {
 
     nodeS.children!.push(this.parse_Clause());
 
-    while (this.currentToken && this.currentToken.type === "KONJUNGTIF") {
-      const tokenKonj = this.currentToken;
-      this.logTrace("S", "Clause KONJUNGTIF Clause");
+    // Loop untuk menangani klausa majemuk, baik dengan konjungsi maupun implisit
+    while (this.currentToken) {
+      if (this.currentToken.type === "KONJUNGTIF") {
+        const tokenKonj = this.currentToken;
+        this.logTrace("S", "Clause KONJUNGTIF Clause");
 
-      this.eat("KONJUNGTIF");
-      nodeS.children!.push({ type: "KONJUNGTIF", value: tokenKonj.value });
-      nodeS.children!.push(this.parse_Clause());
+        this.eat("KONJUNGTIF");
+        nodeS.children!.push({ type: "KONJUNGTIF", value: tokenKonj.value });
+        nodeS.children!.push(this.parse_Clause());
+      } else if (this.isStartOfClause()) {
+        // Implicit conjunction (koma atau spasi pemisah klausa)
+        this.logTrace("S", "Clause (Implicit) Clause");
+        // Opsional: Tambahkan node separator imajiner jika perlu, tapi langsung klausa juga oke
+        nodeS.children!.push(this.parse_Clause());
+      } else {
+        // Token tersisa tidak bisa memulai klausa baru
+        break;
+      }
     }
 
     return nodeS;
+  }
+
+  // Cek apakah token saat ini bisa memulai sebuah klausa baru
+  private isStartOfClause(): boolean {
+    if (!this.currentToken) return false;
+    const type = this.currentToken.type;
+    // Klausa bisa dimulai dengan NP (Subjek/Waktu/Objek) atau VP (Predikat/Aux - Subjek Implisit)
+    return ["SUBJEK", "OBJEK_NOUN", "WAKTU", "PREDIKAT", "AUX"].includes(type);
   }
 
   // Clause -> NP VP (Klausa -> Frasa Nomina + Frasa Verba)
