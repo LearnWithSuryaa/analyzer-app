@@ -171,6 +171,26 @@
         {
             "word": "wayah",
             "level": "OTHER"
+        },
+        {
+            "word": "menika",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "punika",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "iki",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "iku",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "nika",
+            "level": "NEUTRAL"
         }
     ],
     "PREDIKAT": [
@@ -617,6 +637,16 @@
         {
             "word": "kendhel",
             "level": "OTHER"
+        },
+        {
+            "word": "wonten",
+            "level": "NEUTRAL",
+            "pair": "ana"
+        },
+        {
+            "word": "ana",
+            "level": "NEUTRAL",
+            "pair": "wonten"
         }
     ],
     "OBJEK_NOUN": [
@@ -1133,33 +1163,28 @@
     ],
     "PREPOSISI": [
         {
-            "word": "wanci",
-            "level": "NEUTRAL"
-        },
-        {
-            "word": "kala",
-            "level": "NEUTRAL"
-        },
-        {
             "word": "ing",
             "level": "NEUTRAL"
         },
         {
-            "word": "wonten",
+            "word": "dhateng",
             "level": "NEUTRAL"
         },
         {
-            "word": "dhateng",
-            "level": "NEUTRAL",
-            "makna": "ke / kepada (tujuan)"
+            "word": "menyang",
+            "level": "NEUTRAL"
         },
         {
             "word": "saking",
             "level": "NEUTRAL"
         },
         {
+            "word": "saka",
+            "level": "NEUTRAL"
+        },
+        {
             "word": "kagem",
-            "level": "OTHER"
+            "level": "NEUTRAL"
         },
         {
             "word": "kangge",
@@ -1175,10 +1200,6 @@
         },
         {
             "word": "maring",
-            "level": "SELF"
-        },
-        {
-            "word": "menyang",
             "level": "SELF"
         },
         {
@@ -1229,6 +1250,42 @@
         },
         {
             "word": "saha",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "utawi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "utawa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "ananging",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "nanging",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "amargi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "amarga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "supados",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "supaya",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kaliyan",
             "level": "NEUTRAL"
         },
         {
@@ -1390,6 +1447,42 @@
         },
         {
             "word": "kepengker",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "wau",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "mau",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sakmenika",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "saiki",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "mangke",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "mengko",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "benjing",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sesuk",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "nembe",
             "level": "NEUTRAL"
         },
         {

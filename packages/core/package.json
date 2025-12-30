@@ -1,6 +1,6 @@
 {
   "name": "javanese-analyzer-core",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Javanese Krama syntax analyzer with Unggah-Ungguh (politeness level) validation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
