@@ -151,6 +151,26 @@
         {
             "word": "putri",
             "level": "OTHER"
+        },
+        {
+            "word": "kita",
+            "level": "SELF"
+        },
+        {
+            "word": "tiyang atau piyantun",
+            "level": "OTHER"
+        },
+        {
+            "word": "estri",
+            "level": "OTHER"
+        },
+        {
+            "word": "putra",
+            "level": "OTHER"
+        },
+        {
+            "word": "wayah",
+            "level": "OTHER"
         }
     ],
     "PREDIKAT": [
@@ -565,6 +585,38 @@
             "word": "lunga",
             "level": "SELF",
             "pair": "tindak"
+        },
+        {
+            "word": "mergi",
+            "level": "OTHER"
+        },
+        {
+            "word": "dhawuh",
+            "level": "OTHER"
+        },
+        {
+            "word": "mrisani",
+            "level": "OTHER"
+        },
+        {
+            "word": "nedo",
+            "level": "OTHER"
+        },
+        {
+            "word": "tresna",
+            "level": "OTHER"
+        },
+        {
+            "word": "penggalih",
+            "level": "OTHER"
+        },
+        {
+            "word": "potong",
+            "level": "OTHER"
+        },
+        {
+            "word": "kendhel",
+            "level": "OTHER"
         }
     ],
     "OBJEK_NOUN": [
@@ -1049,6 +1101,34 @@
         {
             "word": "lapangan",
             "level": "NEUTRAL"
+        },
+        {
+            "word": "asma",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "soca",
+            "level": "OTHER"
+        },
+        {
+            "word": "lathi",
+            "level": "OTHER"
+        },
+        {
+            "word": "lidhah",
+            "level": "OTHER"
+        },
+        {
+            "word": "pengkeran",
+            "level": "OTHER"
+        },
+        {
+            "word": "jangga",
+            "level": "OTHER"
+        },
+        {
+            "word": "ampeyan",
+            "level": "OTHER"
         }
     ],
     "PREPOSISI": [
@@ -1107,6 +1187,38 @@
         },
         {
             "word": "sareng",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "dateng",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "nginggil",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "ngandhap",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "ngajeng",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "mburi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "amargi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tengen",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kiwa",
             "level": "NEUTRAL"
         }
     ],
@@ -1183,6 +1295,10 @@
             "word": "ewadene",
             "level": "NEUTRAL",
             "makna": "walaupun demikian"
+        },
+        {
+            "word": "menawi",
+            "level": "NEUTRAL"
         }
     ],
     "AUX": [
@@ -1209,6 +1325,34 @@
         {
             "word": "uwis",
             "level": "SELF"
+        },
+        {
+            "word": "mboten",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "menawi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "manggapunaturi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "dereng",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "saget",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kersa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "ampun",
+            "level": "NEUTRAL"
         }
     ],
     "WAKTU": [
@@ -1271,33 +1415,362 @@
         {
             "word": "kala",
             "level": "NEUTRAL"
+        },
+        {
+            "word": "kapan",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kalawingi",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "mbenjang",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "siang",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "dalu atau ndalu",
+            "level": "NEUTRAL"
         }
     ],
     "ADJEKTIVA": [
-        { "word": "sae", "level": "NEUTRAL" },
-        { "word": "awon", "level": "NEUTRAL" },
-        { "word": "ageng", "level": "NEUTRAL" },
-        { "word": "alit", "level": "NEUTRAL" },
-        { "word": "kathah", "level": "NEUTRAL" },
-        { "word": "sekedhik", "level": "NEUTRAL" },
-        { "word": "mirah", "level": "NEUTRAL" },
-        { "word": "awis", "level": "NEUTRAL" },
-        { "word": "inggil", "level": "NEUTRAL" },
-        { "word": "andhap", "level": "NEUTRAL" },
-        { "word": "tebih", "level": "NEUTRAL" },
-        { "word": "celak", "level": "NEUTRAL" },
-        { "word": "enggal", "level": "NEUTRAL" },
-        { "word": "lami", "level": "NEUTRAL" },
-        { "word": "benter", "level": "NEUTRAL" },
-        { "word": "asrep", "level": "NEUTRAL" },
-        {"word": "panas", "level": "NEUTRAL"}
+        {
+            "word": "sae",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "awon",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "ageng",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "alit",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kathah",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekedhik",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "mirah",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "awis",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "inggil",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "andhap",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tebih",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "celak",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "enggal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "lami",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "benter",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "asrep",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "panas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sedanten atau sedaya",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "langkung",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sepuh",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "panjang",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "cendhak",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "benther",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "rahayu",
+            "level": "OTHER"
+        },
+        {
+            "word": "kirangsae",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "leres",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sakedhik",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sami",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "cerak",
+            "level": "NEUTRAL"
+        }
     ],
     "BILANGAN": [
-        { "word": "setunggal", "level": "NEUTRAL" },
-        { "word": "kalih", "level": "NEUTRAL" },
-        { "word": "tiga", "level": "NEUTRAL" },
-        { "word": "sekawan", "level": "NEUTRAL" },
-        { "word": "gangsal", "level": "NEUTRAL" },
-        { "word": "sedasa", "level": "NEUTRAL" }
+        {
+            "word": "setunggal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kalih",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tiga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "gangsal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sedasa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "enem",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "pitu",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "wolu",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sanga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sewelas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kali welas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tiga welas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan welas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "gangsal welas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "enem welas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "pitulas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "wolulas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sangalas",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kalih dasa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "selikur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "kalih likur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang likur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan likur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "selangkung",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "nemlikur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "pitulikor",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "wolulikur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sangalikur",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa setunggal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa kalih",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa tiga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa sekawan",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa gangsal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa enem",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa pitu",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa wolu",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "tigang dasa sanga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa setunggal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa kalih",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa tiga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa sekawan",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa gangsal",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa enem",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa pitu",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa wolu",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sekawan dasa sanga",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "seket",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sewidak",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "pitang dasa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "wolung dasa",
+            "level": "NEUTRAL"
+        },
+        {
+            "word": "sangang dasa",
+            "level": "NEUTRAL"
+        }
     ]
 }

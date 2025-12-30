@@ -73,8 +73,9 @@ body {
 
 /* We will use ::before and ::after to draw the connectors */
 
-.tree-view li::before, .tree-view li::after {
-  content: '';
+.tree-view li::before,
+.tree-view li::after {
+  content: "";
   position: absolute;
   top: 0;
   right: 50%;
@@ -90,7 +91,8 @@ body {
 }
 
 /* We need to remove left-right connectors from elements without any siblings */
-.tree-view li:only-child::after, .tree-view li:only-child::before {
+.tree-view li:only-child::after,
+.tree-view li:only-child::before {
   display: none;
 }
 
@@ -100,7 +102,8 @@ body {
 }
 
 /* Remove left connector from first child and right connector from last child */
-.tree-view li:first-child::before, .tree-view li:last-child::after {
+.tree-view li:first-child::before,
+.tree-view li:last-child::after {
   border: 0 none;
 }
 
@@ -115,7 +118,7 @@ body {
 
 /* Time for the downward connector from parents */
 .tree-view ul ul::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 50%;

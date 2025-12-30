@@ -8,9 +8,6 @@ import {
   ShieldCheck,
   Zap,
   ArrowRight,
-  Globe,
-  Github,
-  Twitter,
   Cpu,
   Search,
 } from "lucide-react";
