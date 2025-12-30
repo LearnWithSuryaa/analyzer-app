@@ -1,7 +1,9 @@
 "use client";
 
 import { ParseNode } from "@/lib/types";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Maximize2, Minimize2 } from "lucide-react";
+import { useState } from "react";
 
 interface TreeVisualizerProps {
   data: ParseNode;
@@ -36,24 +38,81 @@ const TreeNode = ({ node }: { node: ParseNode }) => {
 };
 
 export default function TreeVisualizer({ data }: TreeVisualizerProps) {
-  return (
-    <div className="w-full h-full flex flex-col glass-card bg-slate-900/40 p-0 overflow-hidden">
-      <div className="p-4 border-b border-white/10 bg-white/5 backdrop-blur-md sticky top-0 z-20 flex items-center h-[4.5rem] md:h-auto min-h-[64px]">
-        <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-          <span className="w-6 h-6 flex items-center justify-center">
-            <span className="w-2 h-6 bg-indigo-500 rounded-full inline-block"></span>
-          </span>
-          Parse Tree Structure
-        </h3>
-      </div>
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-      <div className="flex-1 overflow-auto p-4 md:p-8">
-        <div className="tree-view min-w-max mx-auto">
-          <ul>
-            <TreeNode node={data} />
-          </ul>
-        </div>
+  // Common content for both normal and fullscreen views
+  const TreeContent = () => (
+    <div className="flex-1 overflow-auto p-4 md:p-8 w-full h-full custom-scrollbar">
+      <div className="tree-view min-w-max mx-auto">
+        <ul>
+          <TreeNode node={data} />
+        </ul>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* Normal Card View */}
+      {/* Normal Card View */}
+      <div className="w-full h-full flex flex-col glass-card bg-slate-900/40 p-0 overflow-hidden relative group transition-all duration-300 hover:bg-slate-900/50">
+        <div className="p-4 border-b border-white/10 bg-white/5 backdrop-blur-md sticky top-0 z-20 flex justify-between items-center min-h-[64px]">
+          <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+            <span className="w-6 h-6 flex items-center justify-center">
+              <span className="w-2 h-6 bg-indigo-500 rounded-full inline-block"></span>
+            </span>
+            Parse Tree Structure
+          </h3>
+          <button
+            onClick={() => setIsFullscreen(true)}
+            className="p-2 rounded-lg hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+            title="View Fullscreen"
+          >
+            <Maximize2 size={20} />
+          </button>
+        </div>
+
+        <TreeContent />
+      </div>
+
+      {/* Fullscreen Overlay */}
+      <AnimatePresence>
+        {isFullscreen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4 md:p-8"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="w-full h-full flex flex-col glass-card bg-[#0f172a] border border-white/10 overflow-hidden shadow-2xl"
+            >
+              <div className="p-4 md:p-6 border-b border-white/10 bg-white/5 flex justify-between items-center">
+                <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3">
+                  <span className="w-8 h-8 flex items-center justify-center bg-indigo-500/20 rounded-lg">
+                    <span className="lucide lucide-git-branch w-5 h-5 text-indigo-400"></span>
+                  </span>
+                  Parse Tree Structure (Fullscreen)
+                </h3>
+                <button
+                  onClick={() => setIsFullscreen(false)}
+                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  title="Close Fullscreen"
+                >
+                  <Minimize2 size={24} />
+                </button>
+              </div>
+
+              <TreeContent />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
