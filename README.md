@@ -1,80 +1,228 @@
 # Javanese Krama Syntax Analyzer
 
-Aplikasi web untuk menganalisis sintaksis dan validasi Unggah-Ungguh (tingkat kesopanan) dalam bahasa Jawa Krama.
+<div align="center">
 
-## 🚀 Instalasi Lokal
+**Aplikasi web untuk menganalisis sintaksis dan validasi Unggah-Ungguh (tingkat kesopanan) dalam bahasa Jawa Krama.**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/LearnWithSuryaa/analyzer-app)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+[Demo Live](https://javanese-ai.vercel.app) • [Dokumentasi](#-fitur) • [Kontribusi](#-kontribusi)
+
+</div>
+
+---
+
+## 🚀 Quick Start
+
+### Instalasi Lokal
 
 ```bash
 # Clone repository
 git clone https://github.com/LearnWithSuryaa/analyzer-app.git
 cd analyzer-app
 
-# Install dependencies (akan otomatis link workspace @javanese-ai/core)
+# Install dependencies (otomatis link workspace @javanese-ai/core)
 npm install
 
 # Jalankan development server
 npm run dev
 ```
 
-Aplikasi akan berjalan di `http://localhost:3000`
+Aplikasi akan berjalan di **http://localhost:3000**
+
+### Build Production
+
+```bash
+# Build semua workspace
+npm run build
+
+# Start production server
+npm run start --workspace=web
+```
+
+---
 
 ## 📦 Struktur Monorepo
 
 ```
 analyzer-app/
 ├── packages/
-│   └── core/              # @javanese-ai/core - Logika parser & kamus
+│   └── core/                    # @javanese-ai/core
 │       ├── src/
-│       │   ├── analyzer.ts
-│       │   ├── types.ts
+│       │   ├── analyzer.ts      # Parser & Tokenizer
+│       │   ├── types.ts         # Type Definitions
+│       │   ├── index.ts         # Public API
 │       │   └── data/
-│       │       └── kamus_jawa.json
-│       └── package.json
-└── web/                   # Aplikasi Next.js
-    ├── app/
-    ├── components/
-    └── package.json
+│       │       └── kamus_jawa.json  # Kamus 1000+ kata
+│       ├── package.json
+│       └── tsconfig.json
+│
+└── web/                         # Next.js Application
+    ├── app/                     # App Router
+    │   ├── page.tsx             # Landing Page
+    │   ├── analyze/             # Analyzer Page
+    │   ├── docs/                # Documentation
+    │   └── globals.css
+    ├── components/              # React Components
+    │   ├── ChatInput.tsx
+    │   ├── ResultSection.tsx
+    │   └── visualizations/
+    ├── package.json
+    └── tailwind.config.js
 ```
 
-## 🌐 Deployment ke Vercel
-
-### Pengaturan Project di Vercel Dashboard:
-
-1. **Root Directory**: Biarkan kosong (gunakan root `/`)
-2. **Framework Preset**: Next.js
-3. **Build Command**: `cd web && npm run build`
-4. **Output Directory**: `web/.next`
-5. **Install Command**: `npm install`
-
-### Atau gunakan `vercel.json`:
-
-File `vercel.json` sudah dikonfigurasi untuk monorepo. Vercel akan otomatis membaca konfigurasi ini.
+---
 
 ## 🛠️ Tech Stack
 
-- **Core**: TypeScript, Custom CFG Parser
-- **Frontend**: Next.js 16, React 19, Tailwind CSS 4
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
+| Layer          | Technology                    |
+| -------------- | ----------------------------- |
+| **Core Logic** | TypeScript, Custom CFG Parser |
+| **Frontend**   | Next.js 16, React 19          |
+| **Styling**    | Tailwind CSS v3               |
+| **Animations** | Framer Motion                 |
+| **Icons**      | Lucide React                  |
+| **Deployment** | Vercel                        |
 
-## 📚 Fitur
+---
 
-- ✅ Tokenisasi kata Jawa Krama/Ngoko
-- ✅ Parsing sintaksis (S-P-O-K)
-- ✅ Validasi Unggah-Ungguh (politeness level)
-- ✅ Visualisasi Parse Tree interaktif
-- ✅ Derivasi Left-most step-by-step
-- ✅ Fuzzy matching untuk koreksi typo
-- ✅ Support kalimat majemuk & subjek implisit
+## 📚 Fitur Utama
 
-## 📖 Dokumentasi
+### ✅ Analisis Sintaksis (S-P-O-K)
+
+- Tokenisasi kata Jawa Krama/Ngoko
+- Parsing berbasis Context-Free Grammar (CFG)
+- Support kalimat tunggal & majemuk
+- Deteksi subjek implisit
+
+### ✅ Validasi Unggah-Ungguh
+
+- Validasi tingkat kesopanan (politeness level)
+- Deteksi kesalahan penggunaan Krama Inggil/Lugu
+- Saran koreksi otomatis
+
+### ✅ Visualisasi Interaktif
+
+- **Parse Tree**: Visualisasi hierarki sintaksis dengan mode fullscreen
+- **Derivation Trace**: Step-by-step leftmost derivation
+- **Token Analysis**: Breakdown kata per kata dengan keterangan
+
+### ✅ Fuzzy Matching
+
+- Koreksi typo otomatis menggunakan Levenshtein Distance
+- Threshold adaptif berdasarkan panjang kata
+
+---
+
+## 🌐 Deployment ke Vercel
+
+### Opsi 1: Deploy via Dashboard
+
+1. Import repository ke Vercel
+2. **Root Directory**: `web`
+3. Framework akan auto-detect sebagai Next.js
+4. Deploy!
+
+### Opsi 2: Deploy via CLI
+
+```bash
+npm install -g vercel
+vercel
+```
+
+### Konfigurasi (Opsional)
+
+File `vercel.json` sudah dikonfigurasi:
+
+```json
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build --workspace=web",
+  "installCommand": "npm install",
+  "outputDirectory": ".next"
+}
+```
+
+**Catatan**: Set **Root Directory = `web`** di Vercel Dashboard.
+
+---
+
+## 📖 Dokumentasi API
+
+### Import Package
+
+```typescript
+import { analyze } from "@javanese-ai/core";
+
+const result = analyze("Kula nedha sekul");
+console.log(result);
+```
+
+### Response Structure
+
+```typescript
+{
+  tokens: [
+    { token: "kula", label: "SUBJEK", keterangan: "pronomina diri sendiri" },
+    { token: "nedha", label: "PREDIKAT", keterangan: "verba krama lugu" },
+    { token: "sekul", label: "OBJEK_NOUN", keterangan: "tempat / nomina" }
+  ],
+  analisis: {
+    jenis_kalimat: "kalimat tunggal",
+    validitas_sintaksis: "VALID",
+    validitas_unggah_ungguh: "SESUAI",
+    jenis_kesalahan: []
+  },
+  structure: { /* Parse Tree */ },
+  derivations: [ /* Leftmost Derivation Steps */ ]
+}
+```
 
 Dokumentasi lengkap tersedia di `/docs` setelah aplikasi berjalan.
 
+---
+
 ## 🤝 Kontribusi
 
-Contributions are welcome! Silakan buat issue atau pull request.
+Kontribusi sangat diterima! Berikut cara berkontribusi:
+
+1. Fork repository ini
+2. Buat branch fitur (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+### Development Guidelines
+
+- Gunakan TypeScript untuk type safety
+- Follow existing code style
+- Tambahkan test untuk fitur baru
+- Update dokumentasi jika diperlukan
+
+---
 
 ## 📄 Lisensi
 
-MIT License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 👨‍💻 Author
+
+**Surya**
+
+- GitHub: [@LearnWithSuryaa](https://github.com/LearnWithSuryaa)
+- Project Link: [https://github.com/LearnWithSuryaa/analyzer-app](https://github.com/LearnWithSuryaa/analyzer-app)
+
+---
+
+<div align="center">
+
+**⭐ Star this repo if you find it helpful!**
+
+Made with ❤️ for preserving Javanese language and culture
+
+</div>
