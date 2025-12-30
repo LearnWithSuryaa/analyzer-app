@@ -235,13 +235,30 @@ class Parser {
     return ["SUBJEK", "OBJEK_NOUN", "WAKTU", "PREDIKAT", "AUX"].includes(type);
   }
 
-  // Clause -> NP VP (Klausa -> Frasa Nomina + Frasa Verba)
+  // Clause -> (NP)? VP (Klausa -> [Frasa Nomina] + Frasa Verba)
+  // NP menjadi opsional untuk menangani subjek implisit pada kalimat majemuk
   parse_Clause(): ParseNode {
-    this.logTrace("Clause", "NP VP");
+    this.logTrace("Clause", "(NP)? VP");
     const nodeClause: ParseNode = { type: "CLAUSE", children: [] };
 
-    // NP
-    nodeClause.children!.push(this.parse_NP(true));
+    // Cek apakah ada Subjek Eksplisit (NP)
+    // Jika token adalah PREDIKAT atau AUX, berarti subjek implisit -> langsung VP
+    if (
+      this.currentToken &&
+      !["PREDIKAT", "AUX"].includes(this.currentToken.type)
+    ) {
+      // NP (Subjek)
+      try {
+        nodeClause.children!.push(this.parse_NP(true));
+      } catch (e) {
+        // Jika gagal parse NP, mungkin memang bukan NP tapi juga struktur lain yg tidak valid
+        // Tapi logic 'includes' di atas harusnya sudah memfilter kasus umum.
+        // Re-throw jika error beneran.
+        throw e;
+      }
+    } else {
+      this.logTrace("Clause", "Implicit Subject detected");
+    }
 
     // VP
     nodeClause.children!.push(this.parse_VP());
@@ -474,8 +491,27 @@ function validateClause(clauseNode: ParseNode): {
   correction: Record<string, string>;
   errors: SemanticError[];
 } {
-  const nodeNP = clauseNode.children![0];
-  const nodeVP = clauseNode.children![1];
+  /* Perbaikan: Cari children berdasarkan tipe, jangan asumsi index fix */
+  // Struktur: [NP, VP] atau [VP] (implisit subjek)
+  const nodeNP = clauseNode.children?.find((c) => c.type === "NP");
+  const nodeVP = clauseNode.children?.find((c) => c.type === "VP");
+
+  if (!nodeVP) {
+    /* Jika VP tidak ada sama sekali, struktur kacau -> anggap valid/ignore agar tidak crash */
+    return { isValid: true, reason: "", correction: {}, errors: [] };
+  }
+
+  // Jika Subjek Implisit (nodeNP undefined), kita tidak bisa validasi relasi Subjek-Predikatnya
+  // Kecuali kita bisa tarik konteks dari klausa sebelumnya (fitur advanced).
+  // Untuk sekarang, jika implisit, kita skip validasi unggah-ungguh level Subjek-Predikat.
+  if (!nodeNP) {
+    return {
+      isValid: true,
+      reason: "", // Implicit subject, assume valid or inherits previous context
+      correction: {},
+      errors: [],
+    };
+  }
 
   const fullSubjectText = (nodeNP.value || "").toLowerCase();
   const subjectWord = fullSubjectText.split(/\s+/)[0];
