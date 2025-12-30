@@ -305,12 +305,15 @@ export default function DocsPage() {
                   <span className="text-purple-400">import</span> {"{"} analyze{" "}
                   {"}"} <span className="text-purple-400">from</span>{" "}
                   <span className="text-emerald-300">
-                    'javanese-analyzer-core'
+                    &apos;javanese-analyzer-core&apos;
                   </span>
                   ;{"\n\n"}
                   <span className="text-purple-400">const</span> result =
                   analyze(
-                  <span className="text-emerald-300">'Kula nedha sekul'</span>);
+                  <span className="text-emerald-300">
+                    &apos;Kula nedha sekul&apos;
+                  </span>
+                  );
                   {"\n"}
                   <span className="text-blue-300">console</span>.log(result);
                 </code>
@@ -482,7 +485,8 @@ export default function DocsPage() {
                 <div className="grid grid-cols-[150px_1fr] gap-4 text-sm border-b border-white/5 pb-4">
                   <div className="font-mono text-indigo-300">mode</div>
                   <div className="text-white/60">
-                    enum('fast', 'detailed'). extraction level.
+                    enum(&apos;fast&apos;, &apos;detailed&apos;). extraction
+                    level.
                   </div>
                 </div>
               </div>

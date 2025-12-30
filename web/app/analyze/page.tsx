@@ -8,7 +8,7 @@ import {
   analyzeSentence,
   AnalysisResult,
   ChatMessage,
-} from "@javanese-ai/core";
+} from "javanese-analyzer-core";
 import { motion, AnimatePresence } from "framer-motion";
 
 function AnalyzeContent() {

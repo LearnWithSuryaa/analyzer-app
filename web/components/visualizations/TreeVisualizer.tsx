@@ -1,6 +1,6 @@
 "use client";
 
-import { ParseNode } from "@javanese-ai/core";
+import { ParseNode } from "javanese-analyzer-core";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, Minimize2 } from "lucide-react";
 import { useState } from "react";
@@ -28,7 +28,7 @@ const TreeNode = ({ node }: { node: ParseNode }) => {
 
       {node.children && node.children.length > 0 && (
         <ul>
-          {node.children.map((child, index) => (
+          {node.children.map((child: ParseNode, index: number) => (
             <TreeNode key={`${child.type}-${index}`} node={child} />
           ))}
         </ul>
@@ -37,19 +37,18 @@ const TreeNode = ({ node }: { node: ParseNode }) => {
   );
 };
 
+const TreeContent = ({ data }: { data: ParseNode }) => (
+  <div className="flex-1 overflow-auto p-4 md:p-8 w-full h-full custom-scrollbar">
+    <div className="tree-view min-w-max mx-auto">
+      <ul>
+        <TreeNode node={data} />
+      </ul>
+    </div>
+  </div>
+);
+
 export default function TreeVisualizer({ data }: TreeVisualizerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  // Common content for both normal and fullscreen views
-  const TreeContent = () => (
-    <div className="flex-1 overflow-auto p-4 md:p-8 w-full h-full custom-scrollbar">
-      <div className="tree-view min-w-max mx-auto">
-        <ul>
-          <TreeNode node={data} />
-        </ul>
-      </div>
-    </div>
-  );
 
   return (
     <>
@@ -72,7 +71,7 @@ export default function TreeVisualizer({ data }: TreeVisualizerProps) {
           </button>
         </div>
 
-        <TreeContent />
+        <TreeContent data={data} />
       </div>
 
       {/* Fullscreen Overlay */}
@@ -108,7 +107,7 @@ export default function TreeVisualizer({ data }: TreeVisualizerProps) {
                 </button>
               </div>
 
-              <TreeContent />
+              <TreeContent data={data} />
             </motion.div>
           </motion.div>
         )}
