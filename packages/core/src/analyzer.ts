@@ -115,6 +115,26 @@ groups.forEach(([key]) => {
   });
 });
 
+// Daftar kata benda yang menyatakan lokasi/tempat
+// Digunakan untuk disambiguasi "wonten" (Predikat vs Preposisi)
+const LOCATIVE_NOUNS = new Set([
+  "peken",
+  "sekolah",
+  "kantor",
+  "sabin",
+  "kitha",
+  "desa",
+  "stasiun",
+  "latar",
+  "kebon",
+  "lepen",
+  "margi",
+  "radinan",
+  "griya",
+  "dalem",
+  "omah",
+]);
+
 export function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
   const cleanedText = text.toLowerCase().replace(/,/g, " ");
@@ -373,7 +393,7 @@ class Parser {
 
       while (
         this.currentToken &&
-        ["PREPOSISI", "WAKTU"].includes(this.currentToken.type)
+        ["PREPOSISI", "WAKTU", "PREDIKAT"].includes(this.currentToken.type)
       ) {
         if (this.currentToken.type === "PREPOSISI") {
           this.logTrace("VP", "VP PP");
@@ -381,6 +401,36 @@ class Parser {
         } else if (this.currentToken.type === "WAKTU") {
           this.logTrace("VP", "VP WAKTU");
           nodeVP.children!.push(this.parse_NP());
+        } else if (
+          this.currentToken.type === "PREDIKAT" &&
+          this.currentToken.value === "wonten"
+        ) {
+          // Context-Sensitive Gating:
+          // Jika "wonten" diikuti oleh Lokasi, maka anggap sebagai Preposisi (PP),
+          // bukan sebagai Predikat baru (Klausa baru).
+          const nextToken = this.peek(1);
+          if (
+            nextToken &&
+            ["OBJEK_NOUN"].includes(nextToken.type) &&
+            LOCATIVE_NOUNS.has(nextToken.value)
+          ) {
+            this.logTrace("VP", "VP PP (Gated: wonten + Location)");
+            // Konsumsi "wonten" tapi bungkus sebagai PP
+            const tWonten = this.currentToken;
+            this.eat("PREDIKAT"); // Eat 'wonten'
+
+            const nodePP: ParseNode = { type: "PP", children: [] };
+            nodePP.children!.push({ type: "P", value: tWonten.value }); // Re-tag as P
+            nodePP.children!.push(this.parse_NP()); // Parse location NP
+
+            nodeVP.children!.push(nodePP);
+          } else {
+            // Jika bukan lokasi, biarkan loop berhenti.
+            // Token "wonten" akan diproses oleh parse_S sebagai klausa baru.
+            break;
+          }
+        } else {
+          break;
         }
       }
     } else {
