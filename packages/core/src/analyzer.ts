@@ -115,46 +115,13 @@ groups.forEach(([key]) => {
   });
 });
 
-// Daftar kata benda yang menyatakan lokasi/tempat
-// Digunakan untuk disambiguasi "wonten" (Predikat vs Preposisi)
-const LOCATIVE_NOUNS = new Set([
-  "peken",
-  "sekolah",
-  "kantor",
-  "sabin",
-  "kitha",
-  "desa",
-  "stasiun",
-  "latar",
-  "kebon",
-  "lepen",
-  "margi",
-  "radinan",
-  "griya",
-  "dalem",
-  "stasiun",
-  "latar",
-  "kebon",
-  "lepen",
-  "margi",
-  "radinan",
-  "griya",
-  "dalem",
-  "griya",
-  "dalem",
-  "omah",
-  "pawon",
-  "kamar",
-  "sawah",
-  "alas",
-  "gunung",
-  "segara",
-  "kali",
-  "masjid",
-  "langgar",
-  "kelas",
-  "lapangan",
-]);
+// Daftar kata benda yang menyatakan lokasi/tempat (Dimuat dinamis dari data)
+const LOCATIVE_NOUNS = new Set<string>();
+(rawData.OBJEK_NOUN as any[]).forEach((item) => {
+  if (item.is_location) {
+    LOCATIVE_NOUNS.add(item.word);
+  }
+});
 
 // Daftar kata yang bisa berfungsi sebagai Konjungsi maupun Preposisi
 const AMBIGUOUS_CONJ_PREP = new Set(["kaliyan", "sareng", "kalian", "kalihan"]);

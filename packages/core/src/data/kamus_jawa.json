@@ -676,51 +676,63 @@
         },
         {
             "word": "peken",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "sekolah",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "kantor",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "sabin",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "kitha",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "desa",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "stasiun",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "latar",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "kebon",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "lepen",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "margi",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "radinan",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "tedhan",
@@ -750,17 +762,20 @@
         {
             "word": "griya",
             "level": "SELF",
-            "pair": "dalem"
+            "pair": "dalem",
+            "is_location": true
         },
         {
             "word": "dalem",
             "level": "OTHER",
-            "pair": "griya"
+            "pair": "griya",
+            "is_location": true
         },
         {
             "word": "omah",
             "level": "SELF",
-            "pair": "dalem"
+            "pair": "dalem",
+            "is_location": true
         },
         {
             "word": "rasukan",
@@ -1090,47 +1105,58 @@
         },
         {
             "word": "pawon",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "kamar",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "sawah",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "alas",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "gunung",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "segara",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "kali",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "masjid",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "langgar",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "kelas",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "lapangan",
-            "level": "NEUTRAL"
+            "level": "NEUTRAL",
+            "is_location": true
         },
         {
             "word": "asma",
