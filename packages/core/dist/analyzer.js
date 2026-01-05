@@ -120,8 +120,18 @@ const LOCATIVE_NOUNS = new Set([
     "radinan",
     "griya",
     "dalem",
+    "stasiun",
+    "latar",
+    "kebon",
+    "lepen",
+    "margi",
+    "radinan",
+    "griya",
+    "dalem",
     "omah",
 ]);
+// Daftar kata yang bisa berfungsi sebagai Konjungsi maupun Preposisi
+const AMBIGUOUS_CONJ_PREP = new Set(["kaliyan", "sareng", "kalian", "kalihan"]);
 function tokenize(text) {
     const tokens = [];
     const cleanedText = text.toLowerCase().replace(/,/g, " ");
@@ -266,7 +276,10 @@ class Parser {
             nodeNP.children.push({ type: firstToken.type, value: firstToken.value });
             while (this.currentToken) {
                 const tk = this.currentToken;
-                if (tk.type === "KONJUNGTIF") {
+                // Cek Konjungtif ATAU Preposisi Ambigu (misal: kaliyan)
+                const isKonjungtif = tk.type === "KONJUNGTIF" ||
+                    (tk.type === "PREPOSISI" && AMBIGUOUS_CONJ_PREP.has(tk.value));
+                if (isKonjungtif) {
                     if (!isSubject) {
                         const nextTok = this.peek(1);
                         const nextNext = this.peek(2);
@@ -280,13 +293,17 @@ class Parser {
                         if (isNewClauseStart)
                             break;
                     }
-                    this.logTrace("NP", "NP KONJ NP (Compound)");
-                    this.eat("KONJUNGTIF");
+                    this.logTrace("NP", "NP KONJ/PREP NP (Compound)");
+                    // Makan token apapun tipenya (KONJ atau PREP)
+                    this.eat(tk.type);
                     if (this.currentToken &&
                         ["SUBJEK", "OBJEK_NOUN", "WAKTU"].includes(this.currentToken.type)) {
                         const tNext = this.currentToken;
                         this.eat(tNext.type);
                         nodeNP.value += ` ${tk.value} ${tNext.value}`;
+                        // Simpan sebagai KONJUNGTIF di tree untuk konsistensi struktur
+                        nodeNP.children.push({ type: "KONJUNGTIF", value: tk.value });
+                        nodeNP.children.push({ type: tNext.type, value: tNext.value });
                     }
                     else {
                         throw new Error(`Kesalahan Sintaksis: Diharapkan Kata Benda setelah '${tk.value}'`);
