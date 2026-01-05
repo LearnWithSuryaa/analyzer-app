@@ -140,7 +140,20 @@ const LOCATIVE_NOUNS = new Set([
   "radinan",
   "griya",
   "dalem",
+  "griya",
+  "dalem",
   "omah",
+  "pawon",
+  "kamar",
+  "sawah",
+  "alas",
+  "gunung",
+  "segara",
+  "kali",
+  "masjid",
+  "langgar",
+  "kelas",
+  "lapangan",
 ]);
 
 // Daftar kata yang bisa berfungsi sebagai Konjungsi maupun Preposisi
