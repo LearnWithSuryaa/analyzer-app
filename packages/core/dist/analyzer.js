@@ -326,12 +326,13 @@ class Parser {
     // VP
     parse_VP() {
         this.logTrace("VP", "Start Parsing");
-        const nodeVP = { type: "VP", children: [] };
+        const nodeVP = { type: "VP", value: "", children: [] };
         if (this.currentToken && this.currentToken.type === "AUX") {
             this.logTrace("VP", "AUX PREDIKAT ...");
             const tAux = this.currentToken;
             this.eat("AUX");
             nodeVP.children.push({ type: "AUX", value: tAux.value });
+            nodeVP.value += `${tAux.value} `;
         }
         const token = this.currentToken;
         if (token && token.type === "PREDIKAT") {
@@ -339,6 +340,7 @@ class Parser {
             const tV = token; // Store the verb token
             this.eat("PREDIKAT");
             nodeVP.children.push({ type: "V", value: tV.value });
+            nodeVP.value += tV.value;
             // Cek Transitivity
             const isIntransitive = INTRANSITIVE_VERBS.has(tV.value);
             if (this.currentToken) {
