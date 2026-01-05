@@ -126,6 +126,14 @@ const LOCATIVE_NOUNS = new Set<string>();
 // Daftar kata yang bisa berfungsi sebagai Konjungsi maupun Preposisi
 const AMBIGUOUS_CONJ_PREP = new Set(["kaliyan", "sareng", "kalian", "kalihan"]);
 
+// Daftar kata kerja intransitif (Dimuat dinamis)
+const INTRANSITIVE_VERBS = new Set<string>();
+(rawData.PREDIKAT as any[]).forEach((item) => {
+  if (item.transitive === false) {
+    INTRANSITIVE_VERBS.add(item.word);
+  }
+});
+
 export function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
   const cleanedText = text.toLowerCase().replace(/,/g, " ");
@@ -380,15 +388,56 @@ class Parser {
     const token = this.currentToken;
     if (token && token.type === "PREDIKAT") {
       this.logTrace("VP", "PREDIKAT ...");
+      const tV = token; // Store the verb token
       this.eat("PREDIKAT");
-      nodeVP.children!.push({ type: "V", value: token.value });
+      nodeVP.children!.push({ type: "V", value: tV.value });
 
-      if (
-        this.currentToken &&
-        ["OBJEK_NOUN", "SUBJEK"].includes(this.currentToken.type)
-      ) {
-        this.logTrace("VP", "PREDIKAT NP (Object)");
-        nodeVP.children!.push(this.parse_NP());
+      // Cek Transitivity
+      const isIntransitive = INTRANSITIVE_VERBS.has(tV.value);
+
+      if (this.currentToken) {
+        // Jika Intransitif, cek apakah ada Locative Noun (Implicit Preposition)
+        if (isIntransitive) {
+          const nextTok = this.currentToken;
+          if (
+            ["OBJEK_NOUN"].includes(nextTok.type) &&
+            LOCATIVE_NOUNS.has(nextTok.value)
+          ) {
+            // Treat as PP (Implicit)
+            this.logTrace("VP", "Implicit Preposition (Locative Noun)");
+            const nodePP: ParseNode = {
+              type: "PP",
+              value: nextTok.value, // e.g., "peken"
+              children: [],
+              // Optional: Mark as implicit
+            };
+
+            // Disini kita memalsukan struktur PP seolah-olah ada preposisi
+            // Atau cukup simpan NP di dalam PP
+            // Untuk konsistensi dengan 'wonten pawon' (P NP), kita bisa buat:
+            // children: [ {type: 'P_IMPLICIT', value: ''}, {type: NP...} ]
+            // Tapi user mungkin lebih suka node PP langsung membungkus NP
+
+            // Parse sebagai NP dulu
+            const nodeNP = this.parse_NP();
+            nodePP.children!.push(nodeNP);
+            nodeVP.children!.push(nodePP);
+            nodeVP.value += ` ${nodeNP.value}`;
+          }
+          // Jika bukan Locative, maka Intransitif tidak boleh ambil Objek
+          // Break loop (kembali ke parse_Clause)
+        }
+        // Jika Transitif (Default), coba parse NP Object
+        else if (
+          ["SUBJEK", "OBJEK_NOUN", "WAKTU"].includes(this.currentToken.type)
+        ) {
+          // ... Logic lama ...
+          // Cek Ambigu Wonten (sudah ada) -> tapi ini di loop PP/WAKTU di bawah
+          // Tapi kita perlu handle Object disini
+          const nodeNP = this.parse_NP();
+          nodeVP.children!.push(nodeNP);
+          nodeVP.value += ` ${nodeNP.value}`;
+        }
       }
 
       while (
