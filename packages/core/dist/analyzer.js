@@ -244,6 +244,40 @@ class Parser {
         }
         // VP
         nodeClause.children.push(this.parse_VP());
+        // Cek Adjuncts (PP / Keterangan Waktu) yang menempel pada Klausa/S kalimat
+        while (this.currentToken &&
+            ["PREPOSISI", "WAKTU", "PREDIKAT"].includes(this.currentToken.type)) {
+            if (this.currentToken.type === "PREPOSISI") {
+                this.logTrace("Clause", "Clause PP");
+                nodeClause.children.push(this.parse_PP());
+            }
+            else if (this.currentToken.type === "WAKTU") {
+                this.logTrace("Clause", "Clause WAKTU");
+                nodeClause.children.push(this.parse_NP());
+            }
+            else if (this.currentToken.type === "PREDIKAT" &&
+                this.currentToken.value === "wonten") {
+                // Context-Sensitive Gating untuk 'wonten' sebagai PREPOSISI
+                const nextToken = this.peek(1);
+                if (nextToken &&
+                    ["OBJEK_NOUN"].includes(nextToken.type) &&
+                    LOCATIVE_NOUNS.has(nextToken.value)) {
+                    this.logTrace("Clause", "Clause PP (Gated: wonten + Location)");
+                    const tWonten = this.currentToken;
+                    this.eat("PREDIKAT"); // Eat 'wonten'
+                    const nodePP = { type: "PP", children: [] };
+                    nodePP.children.push({ type: "P", value: tWonten.value });
+                    nodePP.children.push(this.parse_NP()); // Parse location
+                    nodeClause.children.push(nodePP);
+                }
+                else {
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+        }
         return nodeClause;
     }
     // NP -> (SUBJEK|OBJEK_NOUN|WAKTU) ...
@@ -297,6 +331,12 @@ class Parser {
                     }
                 }
                 else if (["OBJEK_NOUN", "WAKTU"].includes(tk.type)) {
+                    // Prevent merging Time into Entity NP (and vice versa)
+                    const isHeadTime = firstToken.type === "WAKTU";
+                    const isCurrentTime = tk.type === "WAKTU";
+                    if (isHeadTime !== isCurrentTime) {
+                        break;
+                    }
                     this.logTrace("NP", "NP NOUN (Compound)");
                     this.eat(tk.type);
                     nodeNP.value += ` ${tk.value}`;
@@ -381,44 +421,7 @@ class Parser {
                     nodeVP.value += ` ${nodeNP.value}`;
                 }
             }
-            while (this.currentToken &&
-                ["PREPOSISI", "WAKTU", "PREDIKAT"].includes(this.currentToken.type)) {
-                if (this.currentToken.type === "PREPOSISI") {
-                    this.logTrace("VP", "VP PP");
-                    nodeVP.children.push(this.parse_PP());
-                }
-                else if (this.currentToken.type === "WAKTU") {
-                    this.logTrace("VP", "VP WAKTU");
-                    nodeVP.children.push(this.parse_NP());
-                }
-                else if (this.currentToken.type === "PREDIKAT" &&
-                    this.currentToken.value === "wonten") {
-                    // Context-Sensitive Gating:
-                    // Jika "wonten" diikuti oleh Lokasi, maka anggap sebagai Preposisi (PP),
-                    // bukan sebagai Predikat baru (Klausa baru).
-                    const nextToken = this.peek(1);
-                    if (nextToken &&
-                        ["OBJEK_NOUN"].includes(nextToken.type) &&
-                        LOCATIVE_NOUNS.has(nextToken.value)) {
-                        this.logTrace("VP", "VP PP (Gated: wonten + Location)");
-                        // Konsumsi "wonten" tapi bungkus sebagai PP
-                        const tWonten = this.currentToken;
-                        this.eat("PREDIKAT"); // Eat 'wonten'
-                        const nodePP = { type: "PP", children: [] };
-                        nodePP.children.push({ type: "P", value: tWonten.value }); // Re-tag as P
-                        nodePP.children.push(this.parse_NP()); // Parse location NP
-                        nodeVP.children.push(nodePP);
-                    }
-                    else {
-                        // Jika bukan lokasi, biarkan loop berhenti.
-                        // Token "wonten" akan diproses oleh parse_S sebagai klausa baru.
-                        break;
-                    }
-                }
-                else {
-                    break;
-                }
-            }
+            // Loop for VP adjuncts removed (moved to Clause level)
         }
         else {
             throw new Error(`Kesalahan Sintaksis di VP: Diharapkan PREDIKAT, ditemukan ${token ? token.value : "EOF"}`);
